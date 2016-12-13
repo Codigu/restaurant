@@ -11,7 +11,8 @@
   ],
   "require": {
     "php": ">=5.6.4",
-    "codigu/copya": "dev-master"
+    "codigu/copya": "dev-master",
+    "codigu/categories": "dev-master"
   },
   "autoload": {
     "psr-4": {
