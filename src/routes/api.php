@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 //public api routes
 Route::group(['middleware' => ['api']], function ($router){
     $router->resource('tables', 'TablesController');
+    $router->resource('cuisines', 'CuisinesController');
 });
 
 //authenticated api routes
