@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 */
 
 /* admin pages */
-
+/*
 Route::group(['middleware' => ['web', 'auth']], function ($router) {
     $router->group(['prefix' => Config::get('copya.admin_path'), 'namespace' => 'Admin',], function($router){
         $router->get('/', function(){
@@ -46,16 +46,4 @@ Route::group(['middleware' => ['web', 'auth']], function ($router) {
         });
     });
 });
-
-
-
-
-/* front end pages */
-Route::get('/pages', function () {
-    return "Return List of Pages";
-});
-
-Route::group(['middleware' => 'copya.menu'], function(){
-    Route::get('/', 'FrontEnd\PagesController@showBase')->name('home');
-    Route::get('{slug}', 'FrontEnd\PagesController@show');
-});
+*/

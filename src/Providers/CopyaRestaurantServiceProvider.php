@@ -33,7 +33,7 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
         if (! $this->app->routesAreCached()) {
             $router = app('router');
 
-            $router->group(['namespace' => 'CopyaCategory\Http\Controllers'], function ($router) {
+            $router->group(['namespace' => 'CopyaRestaurant\Http\Controllers'], function ($router) {
 
                 require __DIR__.'/../routes/console.php';
                 require __DIR__.'/../routes/web.php';
@@ -55,7 +55,7 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'api',
-            'namespace' => 'CopyaCategory\Http\Controllers\API',
+            'namespace' => 'CopyaRestaurant\Http\Controllers\API',
             'prefix' => 'api',
         ], function ($router) {
             require __DIR__.'/../routes/api.php';

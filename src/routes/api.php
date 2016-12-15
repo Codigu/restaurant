@@ -13,17 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/pages', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+//public api routes
+Route::group(['middleware' => ['api']], function ($router){
+    $router->resource('tables', 'TablesController');
+});
 
+//authenticated api routes
 Route::group(['middleware' => ['auth:api']], function ($router){
-    $router->resource('users', 'UsersController');
-    $router->resource('pages', 'PagesController');
-    $router->resource('navigations', 'NavigationsController');
-    $router->resource('menus', 'MenusController');
-    $router->resource('forms', 'FormsController');
 
-    $router->get('routes', 'RoutesController@index');
-    $router->get('layouts', 'PagesController@getTemplates');
 });

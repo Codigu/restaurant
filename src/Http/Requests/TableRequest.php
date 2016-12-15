@@ -1,11 +1,12 @@
 <?php
 
-namespace Copya\Http\Requests;
+namespace CopyaRestaurant\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NavigationRequest extends FormRequest
+class TableRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,13 +26,9 @@ class NavigationRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->get('items')){
-            return [];
-        }
-        else {
-            return [
-                'name' => 'required'
-            ];
-        }
+        return [
+            'name' => 'required',
+            'capacity' => 'required'
+        ];
     }
 }
