@@ -25,7 +25,13 @@ class TablesController extends ApiBaseController
 
     public function show($id)
     {
-        //no functionality as of the moment
+        try{
+            $table = Table::find($id);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        return $this->item($table, new TableTransformer);
     }
 
     public function store(TableRequest $request)

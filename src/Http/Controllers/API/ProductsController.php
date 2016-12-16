@@ -24,7 +24,13 @@ class ProductsController extends ApiBaseController
 
     public function show($id)
     {
-        //no functionality as of the moment
+        try{
+            $product = Product::find($id);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+        return $this->item($product, new ProductTransformer);
     }
 
     public function store(ProductRequest $request)
