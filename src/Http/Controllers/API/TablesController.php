@@ -8,15 +8,9 @@ use CopyaRestaurant\Transformers\TableTransformer;
 use Exception;
 use CopyaRestaurant\Http\Requests\TableRequest;
 use CopyaRestaurant\Eloquent\Area;
-use Request;
 
 class TablesController extends ApiBaseController
 {
-
-    /*public function __construct()
-    {
-        $this->middleware('auth')->except('index');
-    }*/
 
     public function index()
     {

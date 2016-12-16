@@ -13,11 +13,6 @@ use CopyaCategory\Eloquent\Category;
 class CuisinesController extends ApiBaseController
 {
 
-    /*public function __construct()
-    {
-        $this->middleware('auth')->except('index');
-    }*/
-
     public function index()
     {
         try{
@@ -55,7 +50,7 @@ class CuisinesController extends ApiBaseController
         return $this->item($cuisine, new CuisineTransformer);
     }
 
-    public function update(TableRequest $request, $id)
+    public function update(CuisineRequest $request, $id)
     {
 
         try {
