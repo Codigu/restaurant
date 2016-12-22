@@ -42,6 +42,7 @@ class CuisinesController extends ApiBaseController
             $cuisine->name = $request->name;
             $cuisine->description = $request->has('description') ? $request->description : '';
             $cuisine->price = $request->price;
+            $cuisine->pre_orderable = $request->has('pre_orderable');
             $cuisine->sale_price = $request->has('sale_price') ? $request->sale_price : 0;
             $cuisine->featured_image = $request->has('featured_image') ? $request->featured_image : '';
 
@@ -64,6 +65,7 @@ class CuisinesController extends ApiBaseController
             $cuisine->name = $request->name;
             $cuisine->description = $request->has('description') ? $request->description : '';
             $cuisine->price = $request->price;
+            $cuisine->pre_orderable = $request->has('pre_orderable');
             $cuisine->sale_price = $request->has('sale_price') ? $request->sale_price : 0;
             $cuisine->featured_image = $request->has('featured_image') ? $request->featured_image : '';
 

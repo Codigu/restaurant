@@ -109,9 +109,9 @@ class CopyaRestaurantMigration extends Migration
             $table->float('price');
             $table->float('sale_price');
             $table->integer('category_id')->unsigned();
+            $table->boolean('pre_orderable');
             $table->string('featured_image');
             $table->timestamps();
-
             $table->foreign('category_id')
                 ->references('id')->on('categories');
         });

@@ -30,4 +30,13 @@ class Reservation extends Model
         return $this->belongsTo('CopyaRestaurant\Eloquent\Status');
     }
 
+    public function tables()
+    {
+        return $this->belongsToMany('CopyaRestaurant\Eloquent\Table');
+    }
+
+    public function cuisines()
+    {
+        return $this->belongsToMany('CopyaRestaurant\Eloquent\Cuisine');
+    }
 }
