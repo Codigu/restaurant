@@ -1,27 +1,28 @@
 <?php
 
-namespace CopyaRestaurant\Http\Controllers\API\Reservations;
+namespace CopyaRestaurant\Http\Controllers\API\Orders;
 
 use Copya\Http\Controllers\API\ApiBaseController;
 use CopyaRestaurant\Eloquent\Cuisine;
 use CopyaRestaurant\Transformers\CuisineTransformer;
+use CopyaRestaurant\Transformers\ProductTransformer;
 use Exception;
 use CopyaRestaurant\Http\Requests\ReservationCuisineRequest;
-use CopyaRestaurant\Eloquent\Reservation;
+use CopyaRestaurant\Eloquent\Order;
 
-class CuisinesController extends ApiBaseController
+class ProductsController extends ApiBaseController
 {
 
-    public function index($reservation_id)
+    public function index($order_id)
     {
         try{
-            $reservation = Reservation::find($reservation_id);
-            $cuisines = $reservation->cuisines;
+            $order = Order::find($order_id);
+            $products = $order->products;
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return $this->collection($cuisines, new CuisineTransformer);
+        return $this->collection($products, new ProductTransformer);
     }
 
     public function store(ReservationCuisineRequest $request, $reservation_id)
