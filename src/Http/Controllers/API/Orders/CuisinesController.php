@@ -1,6 +1,6 @@
 <?php
 
-namespace CopyaRestaurant\Http\Controllers\API\Reservations;
+namespace CopyaRestaurant\Http\Controllers\API\Orders;
 
 use Copya\Http\Controllers\API\ApiBaseController;
 use CopyaRestaurant\Eloquent\Cuisine;

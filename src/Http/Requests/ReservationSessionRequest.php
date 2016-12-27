@@ -4,7 +4,7 @@ namespace CopyaRestaurant\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReservationRequest extends FormRequest
+class ReservationSessionRequest extends FormRequest
 {
 
     /**
@@ -27,12 +27,9 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_name' => 'required',
             'email' => 'email',
             'guest_count' => 'numeric|required',
             'area_id' => 'exists:areas,id|required',
-            'phone' => 'required',
-            'amount' => 'numeric|required',
             'discount' => 'numeric',
             'deposit' => 'numeric',
             'status_id' => 'exists:statuses,id|nullable',
