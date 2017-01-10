@@ -22,20 +22,4 @@ class Order extends Model
     {
         return $this->belongsTo('CopyaRestaurant\Eloquent\Status');
     }
-
-    /**
-     * Get all of the posts that are assigned this tag.
-     */
-    public function cuisines()
-    {
-        return $this->morphedByMany('CopyaRestaurant\Eloquent\Cuisine', 'orderable');
-    }
-
-    /**
-     * Get all of the videos that are assigned this tag.
-     */
-    public function products()
-    {
-        return $this->morphedByMany('CopyaRestaurant\Eloquent\Product', 'orderable');
-    }
 }

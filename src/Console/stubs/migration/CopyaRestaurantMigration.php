@@ -54,7 +54,6 @@ class CopyaRestaurantMigration extends Migration
             $table->float('deposit');
             $table->integer('status_id')->unsigned();
             $table->text('note');
-            $table->timestamp('reserved_at');
             $table->timestamps();
 
             $table->foreign('area_id')
