@@ -60,6 +60,15 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
         ], function ($router) {
             require __DIR__.'/../routes/api.php';
         });
+
+        //extended routes
+        Route::group([
+            'middleware' => 'api',
+            'namespace' => 'CopyaCategory\Http\Controllers\API',
+            'prefix' => 'api',
+        ], function ($router) {
+            require __DIR__.'/../routes/category.php';
+        });
     }
 
     public function register()

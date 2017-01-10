@@ -7,16 +7,24 @@ use CopyaRestaurant\Eloquent\Cuisine;
 use CopyaRestaurant\Transformers\CuisineTransformer;
 use Exception;
 use CopyaRestaurant\Http\Requests\CuisineRequest;
-use CopyaRestaurant\Eloquent\Area;
 use CopyaCategory\Eloquent\Category;
+use Illuminate\Http\Request;
 
 class CuisinesController extends ApiBaseController
 {
 
-    public function index()
+    public function index(Request $request)
     {
         try{
-            $cuisines = Cuisine::all();
+            if($request->has('category_id')){
+                $categories = explode(',', $request->get('category_id'));
+                /*$cuisines = Cuisine::whereHas('category', function($query) use ($categories){
+                    $query->whereIn('id', $categories);
+                });*/
+                $cuisines = Cuisine::whereIn('category_id', $categories)->get();
+            } else{
+                $cuisines = Cuisine::all();
+            }
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
