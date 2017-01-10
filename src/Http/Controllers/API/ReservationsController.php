@@ -9,7 +9,6 @@ use CopyaRestaurant\Transformers\ReservationTransformer;
 use Exception;
 use CopyaRestaurant\Http\Requests\ReservationRequest;
 use CopyaRestaurant\Eloquent\Area;
-use Carbon\Carbon;
 
 
 class ReservationsController extends ApiBaseController
@@ -50,7 +49,6 @@ class ReservationsController extends ApiBaseController
             $reservation->discount =  $request->has('discount') ? $request->discount : 0;
             $reservation->deposit = $request->has('deposit') ? $request->deposit : 0;
             $reservation->note = $request->has('note') ? $request->note : '';
-            $reservation->reserved_at = new Carbon($request->reserved_at);
 
             $area  = Area::find($request->area_id);
             //set status to pending
@@ -81,16 +79,17 @@ class ReservationsController extends ApiBaseController
             $reservation->discount =  $request->has('discount') ? $request->discount : 0;
             $reservation->deposit = $request->has('deposit') ? $request->deposit : 0;
             $reservation->note = $request->has('note') ? $request->note : '';
-            $reservation->reserved_at = new Carbon($request->reserved_at);
 
             if($reservation->area_id != $request->area_id){
                 $area  = Area::find($request->area_id);
+                dd($area);
                 $reservation->area()->disassociate();
                 $reservation->area()->associate($area);
             }
 
             if($request->has('status_id') && $reservation->status_id != $request->status_id){
                 $status  = Status::find($request->status_id);
+                dd($status);
                 $reservation->status()->disassociate();
                 $reservation->status()->associate($status);
             }

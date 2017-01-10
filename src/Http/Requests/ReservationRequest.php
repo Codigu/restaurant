@@ -37,7 +37,6 @@ class ReservationRequest extends FormRequest
             'deposit' => 'numeric',
             'status_id' => 'exists:statuses,id|nullable',
             'note' => 'string|nullable',
-            'reserved_at' => 'date|required'
         ];
     }
 }

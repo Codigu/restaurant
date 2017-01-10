@@ -28,9 +28,4 @@ class Cuisine extends Model
     {
         return $this->belongsTo('CopyaCategory\Eloquent\Category');
     }
-
-    public function orders()
-    {
-        return $this->morphToMany('CopyaRestaurant\Eloquent\Order', 'orderable');
-    }
 }

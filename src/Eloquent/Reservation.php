@@ -8,7 +8,7 @@ class Reservation extends Model
 {
 
     protected $table = 'reservations';
-    protected $fillable = array(
+    protected $fillable = [
         'customer_name',
         'email',
         'guest_count',
@@ -18,11 +18,7 @@ class Reservation extends Model
         'discount',
         'deposit',
         'note'
-    );
-
-    protected $dates = array(
-        'reserved_at'
-    );
+    ];
 
     public function area()
     {
