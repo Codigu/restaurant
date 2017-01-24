@@ -7,7 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 
-class ReservationsController extends ApiBaseController
+class CuisinesController extends ApiBaseController
 {
     public function __construct()
     {
@@ -17,7 +17,7 @@ class ReservationsController extends ApiBaseController
     public function index(Request $request)
     {
         try{
-            $reservation = $request->session()->get('reservation');
+            $reservation = $request->session()->get('cuisines');
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -25,23 +25,13 @@ class ReservationsController extends ApiBaseController
         return response()->json(['data' => $reservation]);
     }
 
-    /*public function show(Request $request, $id)
-    {
-        try{
-            $reservation = $request->session()->get('reservation');
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        return response()->json(['data' => $reservation]);
-    }*/
 
     public function store(Request $request)
     {
         try {
             $data = $request->all();
             foreach($data as $key => $value){
-                $request->session()->put('reservation.'.$key, $value);
+                $request->session()->put('cuisines.'.$key, $value);
             }
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

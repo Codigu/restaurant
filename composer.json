@@ -18,5 +18,10 @@
     "psr-4": {
       "CopyaRestaurant\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/RestaurantTestCase.php"
+    ]
   }
 }

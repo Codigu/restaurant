@@ -18,7 +18,8 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../../resources/assets/js' => base_path('resources/assets/js'),
-        ], 'copya-category');
+        ], 'restaurant-scripts');
+
 
         $this->defineRoutes();
     }
