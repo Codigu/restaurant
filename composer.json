@@ -14,14 +14,18 @@
     "codigu/copya": "dev-master",
     "codigu/categories": "dev-master"
   },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+  },
   "autoload": {
     "psr-4": {
       "CopyaRestaurant\\": "src/"
-    }
-  },
-  "autoload-dev": {
+    },
     "classmap": [
       "tests/ReservationTestCase.php"
     ]
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
