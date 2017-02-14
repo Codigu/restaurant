@@ -20,6 +20,9 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
             __DIR__.'/../../resources/assets/js' => base_path('resources/assets/js'),
         ], 'restaurant-scripts');
 
+        $this->publishes([
+            __DIR__.'/../../resources/views/' => base_path('resources/views/vendor/copya/front'),
+        ], 'restaurant-views');
 
         $this->defineRoutes();
     }
@@ -41,7 +44,6 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
             });
 
             $this->mapApiRoutes();
-
         }
     }
 
@@ -65,7 +67,7 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
         //extended routes
         Route::group([
             'middleware' => 'api',
-            'namespace' => 'CopyaCategory\Http\Controllers\API',
+            'namespace' => 'CopyaRestaurant\Http\Controllers\API',
             'prefix' => 'api',
         ], function ($router) {
             require __DIR__.'/../routes/category.php';

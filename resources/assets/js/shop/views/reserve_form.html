@@ -1,0 +1,132 @@
+<div class="wrapping" style="padding: 20px;">
+    <!-- Reservation Form -->
+    <div class="form-container" id="reservation-form" ng-show="reservationinfo">
+        <div class="form-header"><h3 class="form-title">RESERVATION</h3></div>
+        <div class="form-body">
+            <div class="form-group form-group-default">
+                <label for="">Number of Guest</label>
+                <input type="text" name="" value="" class="form-control" />
+            </div>
+            <div class="form-group form-group-default">
+                <label for="">Environment</label>
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    <option value="">Environment 1</option>
+                    <option value="">Environment 2</option>
+                    <option value="">Environment 3</option>
+                </select>
+            </div>
+            <div class="form-group form-group-default">
+                <label for="">Date & Time</label>
+                <input type="text" name="" value="" class="form-control" />
+            </div>
+        </div>
+        <div class="form-footer">
+            <div class="colmn6 colmn-offset-right">
+                <a href="" class="btn btn-default btn-block" ng-click="preorderInfo()"><i class="fa fa-shopping-bag fa-left"></i>Pre-Order</a>
+            </div>
+            <div class="colmn6 colmn-offset-left">
+                <a href="" class="btn btn-success btn-block" ng-click="customerInfo()">Continue<i class="fa fa-angle-right fa-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pre-order Information -->
+    <div class="form-container" id="preorder-form" ng-show="preorderinfo">
+        <div class="form-header"><h3 class="form-title">PRE-ORDER</h3></div>
+        <div class="form-body">
+            <div class="categories">
+                <h3 class="section-title">Categories</h3>
+                <ul class="category-menu">
+                    <li ng-repeat="category in categories | orderBy:'name' track by $index">
+                        <a href="" ng-click="loadCategoryMenus($event)" data-id="{{ category.id }}" ng-class="catactive == 'catactive{{ category.id }}' ? 'active' : ''" class="menu{{ $index }}">{{ category.name }}<i class="fa fa-angle-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu">
+                <h3 class="section-title">{{ default_catname }} Menu</h3>
+                <ul class="listing-menu" data-catid="{{ default_catid }}">
+                    <li ng-repeat="item in default_catmenu track by $index">
+                        <div class="item-box">
+                            <div class="item-pic"></div>
+                            <h4 class="item-name">{{ item.name }}</h4>
+                            <p class="item-price">Php {{ item.price }}</p>
+                            <a href="" class="btn btn-block btn-default" ng-click="addToBag($event)" data-item="{{ item.id }}">
+                                <i class="fa fa-shopping-bag fa-left"></i>Add to Bag
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="summary">
+                <h3 class="section-title">Summary</h3>
+                <p ng-if="preorder == 0" class="summary-empty">
+                    <span><i class="fa fa-shopping-bag"></i>You don't have pre-order menu</span>
+                </p>
+                <ul class="summary-listing" ng-if="preorder != 0">
+                    <li ng-repeat="item in preorder track by $index">
+                        <a href="" class="summary-remove" ng-click="removeFromBag(item)"><i class="fa fa-trash"></i></a>
+                        <p class="summary-name">{{ item.name }}</p>
+                        <div class="colleft">
+                            <p class="summary-collabel">Price</p>
+                            <p class="summary-price">Php {{ item.price }}</p>
+                        </div>
+                        <div class="colcenter">
+                            <p class="summary-collabel">Qtty</p>
+                            <input type="text" name="" value="{{ item.quantity }}" class="summary-quantity" ng-model="item.quantity"/>
+                        </div>
+                        <div class="colright">
+                            <p class="summary-collabel">subtotal</p>
+                            <p class="summary-subtotal">Php {{ item.quantity * item.price }}</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="summary-footer" ng-if="preorder != 0">
+                    <p class="labels">VAT</p>
+                    <p class="totals">12%</p>
+                    <p class="labels">Subtotal</p>
+                    <p class="totals">Php 999,999</p>
+                    <p class="labels">Total</p>
+                    <p class="totals">Php 999,999</p>
+                </div>
+                <h3 class="section-title" ng-if="preorder != 0">Notes</h3>
+                <textarea name="" id="" class="summary-notes" ng-if="preorder != 0"></textarea>
+                <div class="form-footer">
+                    <div class="colmn6 colmn-offset-right">
+                        <a href="" class="btn btn-default btn-block" ng-click="reservationInfo()"><i class="fa fa-angle-left fa-left"></i>Back</a>
+                    </div>
+                    <div class="colmn6 colmn-offset-left">
+                        <a href="" class="btn btn-success btn-block" ng-click="customerInfo()">Continue<i class="fa fa-angle-right fa-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Information -->
+    <div class="form-container" id="reservation-form" ng-show="customerinfo">
+        <div class="form-header"><h3 class="form-title">CUSTOMER INFORMATION</h3></div>
+        <div class="form-body">
+            <div class="form-group form-group-default">
+                <label for="">Name</label>
+                <input type="text" name="" value="" class="form-control" />
+            </div>
+            <div class="form-group form-group-default">
+                <label for="">Phone</label>
+                <input type="number" name="" value="" class="form-control" />
+            </div>
+            <div class="form-group form-group-default">
+                <label for="">Email</label>
+                <input type="email" name="" value="" class="form-control" />
+            </div>
+        </div>
+        <div class="form-footer">
+            <div class="colmn6 colmn-offset-right">
+                <a href="" class="btn btn-default btn-block" ng-click="reservationInfo()"><i class="fa fa-angle-left fa-left"></i>Back</a>
+            </div>
+            <div class="colmn6 colmn-offset-left">
+                <a href="" class="btn btn-success btn-block">DONE<i class="fa fa-check fa-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

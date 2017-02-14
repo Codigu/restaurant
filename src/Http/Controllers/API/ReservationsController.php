@@ -3,6 +3,7 @@
 namespace CopyaRestaurant\Http\Controllers\API;
 
 use Copya\Http\Controllers\API\ApiBaseController;
+use CopyaRestaurant\Eloquent\Cuisine;
 use CopyaRestaurant\Eloquent\Reservation;
 use CopyaRestaurant\Eloquent\Status;
 use CopyaRestaurant\Transformers\ReservationTransformer;
@@ -40,24 +41,42 @@ class ReservationsController extends ApiBaseController
     public function store(ReservationRequest $request)
     {
         try {
+            $data = $request->all();
+            $reservationData = $data['reservation'];
+            $bag = $data['bag'];
             $reservation = new Reservation;
-            $reservation->customer_name = $request->customer_name;
-            $reservation->email = $request->has('email') ? $request->email : '';
-            $reservation->guest_count = $request->guest_count;
-            $reservation->phone = $request->has('phone') ? $request->phone : '';
-            $reservation->is_agent = $request->has('is_agent') ? (bool) $request->is_agent : false;
-            $reservation->amount = $request->amount;
-            $reservation->discount =  $request->has('discount') ? $request->discount : 0;
-            $reservation->deposit = $request->has('deposit') ? $request->deposit : 0;
-            $reservation->note = $request->has('note') ? $request->note : '';
-            $reservation->reserved_at = new Carbon($request->reserved_at);
+            $reservation->customer_name = $reservationData['customer_name'];
+            $reservation->email = isset($reservationData['email']) ? $reservationData['email'] : '';
+            $reservation->guest_count = $reservationData['guest_count'];
+            $reservation->phone = isset($reservationData['phone']) ? $reservationData['phone'] : '';
+            $reservation->is_agent = isset($reservationData['is_agent']) ? (bool) $reservationData['is_agent'] : false;
+            $reservation->amount = 0;
+            $reservation->discount = 0;
+            $reservation->deposit = 0;
+            $reservation->note = isset($reservationData['note']) ? $reservationData['note'] : '';
+            //$reservation->reserved_at = new Carbon($request->reserved_at);
+            $reservation->reserved_at = Carbon::now();
 
-            $area  = Area::find($request->area_id);
             //set status to pending
             $status = Status::findBySlug('pending');
-            $reservation->area()->associate($area);
+            $environment = $reservationData['environment'];
+
+            $area = Area::find($environment['id']);
+            $reservation->assign($area);
             $reservation->status()->associate($status);
             $reservation->save();
+
+            //deal w/ the pre order
+            if(isset($bag)){
+                foreach($bag as $item){
+                    $cuisine = Cuisine::find($item['id']);
+
+                    $reservation->cuisines()->attach($cuisine->id, [
+                        'price' => $cuisine->price,
+                        'quantity' => $item['quantity']
+                    ]);
+                }
+            }
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -70,6 +89,7 @@ class ReservationsController extends ApiBaseController
     {
 
         try {
+
             $reservation = Reservation::find($id);
 
             $reservation->customer_name = $request->customer_name;

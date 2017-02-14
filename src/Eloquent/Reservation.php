@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Exception;
 use CopyaRestaurant\Eloquent\Status;
 use Illuminate\Database\Eloquent\Collection;
+use CopyaRestaurant\Eloquent\Area;
 
 class Reservation extends Model
 {
@@ -38,7 +39,7 @@ class Reservation extends Model
         return $this->belongsToMany('CopyaRestaurant\Eloquent\Cuisine');
     }
 
-    public function assign($area)
+    public function assign(Area $area)
     {
         $this->area()->associate($area);
     }

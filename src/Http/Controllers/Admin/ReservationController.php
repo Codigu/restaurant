@@ -1,8 +1,10 @@
 <?php
 
-namespace Copya\Http\Controllers\Admin;
+namespace CopyaRestaurant\Http\Controllers\Admin;
 
-class UsersController extends BaseController
+use Copya\Http\Controllers\Admin\BaseController;
+
+class ReservationController extends BaseController
 {
     public function index()
     {
