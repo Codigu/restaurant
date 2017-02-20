@@ -20,10 +20,7 @@
   "autoload": {
     "psr-4": {
       "CopyaRestaurant\\": "src/"
-    },
-    "classmap": [
-      "tests/ReservationTestCase.php"
-    ]
+    }
   },
   "scripts": {
     "test": "phpunit"

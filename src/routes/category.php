@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 //public api routes
 Route::group(['middleware' => ['api']], function ($router){
     $router->resource('bistro-categories', 'CategoriesController');
-
+    $router->resource('shop-categories', 'ShopCategoriesController');
 
 });
 
