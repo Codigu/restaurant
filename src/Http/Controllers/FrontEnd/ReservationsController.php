@@ -7,12 +7,10 @@ use Copya\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
 use CopyaRestaurant\Eloquent\Product;
 
-class ProductsController extends BaseController
+class ReservationsController extends BaseController
 {
     public function index()
     {
-        $products  = Product::all();
-
-        return view('vendor.copya.front.restaurant.shop');
+        return view('vendor.copya.front.restaurant.reservation');
     }
 }

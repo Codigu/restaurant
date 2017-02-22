@@ -11,15 +11,14 @@ use CopyaCategory\Http\Requests\CategoryRequest;
 
 
 
-class CategoriesController extends ApiBaseController
+class ShopCategoriesController extends ApiBaseController
 {
     public function index()
     {
-        $categories = Category::whereHas('cuisines', function($query){
-            $query->where('pre_orderable', '1');
-        })->get();
+        $categories = Category::whereHas('products')->get();
 
         return $this->collection($categories, new CategoryTransformer);
     }
+
 
 }
