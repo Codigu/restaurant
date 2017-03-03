@@ -9,6 +9,7 @@ use CopyaRestaurant\Http\Requests\ProductRequest;
 use CopyaRestaurant\Eloquent\Product;
 use CopyaCategory\Eloquent\Category;
 
+
 class ProductsController extends ApiBaseController
 {
     public function index()

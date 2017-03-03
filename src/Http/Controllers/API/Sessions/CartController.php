@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Session;
 use Log;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends ApiBaseController
 {
@@ -14,7 +15,6 @@ class CartController extends ApiBaseController
     public function index(Request $request)
     {
         try{
-            $cart = Session::get('cart');
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -26,19 +26,15 @@ class CartController extends ApiBaseController
     public function store(Request $request)
     {
         try {
-            Log::info("Before".print_r(Session::get('cart'), true));
+            Log::info(print_r(Auth::user(), true));
             $data = $request->all();
-            $cart =  Session::get('cart');
-
             $cart[] = $data;
 
-            Session::put('cart', $cart);
-            Log::info(print_r(Session::get('cart'), true));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return response()->json(['data' => $request->session()->get('cart')]);
+        return response()->json(['data' => Auth::user()]);
     }
 
     public function update(Request $request, $id)
