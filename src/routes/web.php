@@ -29,4 +29,5 @@ Route::group(['middleware' => ['web', 'auth']], function ($router) {
 Route::group(['middleware' => ['web']], function ($router) {
     $router->get('/reservation', 'Frontend\ReservationsController@index')->name('products.index');
     $router->get('/shop', 'Frontend\ProductsController@index')->name('shop.index');
+    $router->get('/checkout', 'Frontend\CheckoutController@doCheckout')->name('shop.checkout');
 });

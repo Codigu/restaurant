@@ -12,7 +12,6 @@ class ProductsController extends BaseController
     public function index()
     {
         $products  = Product::all();
-
         return view('vendor.copya.front.restaurant.shop');
     }
 }

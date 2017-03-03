@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 //public api routes
-Route::group(['middleware' => ['api']], function ($router){
+Route::group(['middleware' => ['session:api']], function ($router){
     $router->resource('tables', 'TablesController');
     $router->resource('areas', 'AreasController');
     $router->resource('cuisines', 'CuisinesController');
@@ -27,6 +27,7 @@ Route::group(['middleware' => ['api']], function ($router){
     $router->resource('orders/{order}/products', 'Orders\ProductsController');
     $router->resource('session/reservations', 'Sessions\ReservationsController');
     $router->resource('session/cuisines', 'Sessions\CuisinesController');
+    $router->resource('session/cart', 'Sessions\CartController');
 });
 
 //authenticated api routes

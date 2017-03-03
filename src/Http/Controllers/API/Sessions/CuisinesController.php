@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class CuisinesController extends ApiBaseController
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware(['session']);
-    }
+    }*/
 
     public function index(Request $request)
     {

@@ -8,8 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/reservation.css" rel="stylesheet">
+    <link href="/css/vendors.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -18,12 +21,7 @@
         ]); ?>
     </script>
 </head>
-<body>
-
-@yield('layout')
-
-
-        <!-- Scripts -->
-<script src="/js/app.js"></script>
+<body  ng-app="copya-shop"  style="border-left:70px solid #2b303b; border-top: 60px solid #2b303b;">
+    @yield('content')
 </body>
 </html>

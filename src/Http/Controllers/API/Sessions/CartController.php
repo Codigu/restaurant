@@ -5,49 +5,40 @@ namespace CopyaRestaurant\Http\Controllers\API\Sessions;
 use Copya\Http\Controllers\API\ApiBaseController;
 use Exception;
 use Illuminate\Http\Request;
+use Session;
+use Log;
 
-
-class ReservationsController extends ApiBaseController
+class CartController extends ApiBaseController
 {
-    /*public function __construct()
-    {
-        $this->middleware(['session']);
-    }*/
 
     public function index(Request $request)
     {
         try{
-            $reservation = $request->session()->get('reservation');
+            $cart = Session::get('cart');
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return response()->json(['data' => $reservation]);
+        return response()->json(['data' => $cart]);
     }
 
-    /*public function show(Request $request, $id)
-    {
-        try{
-            $reservation = $request->session()->get('reservation');
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-
-        return response()->json(['data' => $reservation]);
-    }*/
 
     public function store(Request $request)
     {
         try {
+            Log::info("Before".print_r(Session::get('cart'), true));
             $data = $request->all();
-            foreach($data as $key => $value){
-                $request->session()->put('reservation.'.$key, $value);
-            }
+            $cart =  Session::get('cart');
+
+            $cart[] = $data;
+
+            Session::put('cart', $cart);
+            Log::info(print_r(Session::get('cart'), true));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return response()->json(['data' => $request->session()->get('reservation')]);
+        return response()->json(['data' => $request->session()->get('cart')]);
     }
 
     public function update(Request $request, $id)
