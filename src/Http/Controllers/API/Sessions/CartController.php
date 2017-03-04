@@ -3,21 +3,17 @@
 namespace CopyaRestaurant\Http\Controllers\API\Sessions;
 
 use Copya\Http\Controllers\API\ApiBaseController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Exception;
 use Illuminate\Http\Request;
-use Session;
 use Log;
-use Illuminate\Support\Facades\Auth;
-use CartProvider;
-use Syscover\ShoppingCart\Item;
-use Syscover\ShoppingCart\TaxRule;
 
 class CartController extends ApiBaseController
 {
 
     public function index(Request $request)
     {
-        $cart = CartProvider::instance()->getCartItems();
+        $cart = [];
         try{
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -31,21 +27,19 @@ class CartController extends ApiBaseController
     {
         try {
             $data = $request->all();
-            CartProvider::instance()->add([
-                new Item(
-                    $data['id'],
-                    $data['name'],
-                    1,
-                    $data['price']
-                ),
-            ]);
-            $cart = CartProvider::instance()->getCartItems();
+
+            $cartItem = Cart::add(
+                $data['id'],
+                $data['name'],
+                1,
+                $data['price']
+            )->associate('Product');
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return response()->json(['data' => $cart]);
+        return response()->json(['data' => $cartItem]);
     }
 
     public function update(Request $request, $id)
