@@ -27,7 +27,6 @@ Route::group(['middleware' => ['api']], function ($router){
     $router->resource('orders/{order}/products', 'Orders\ProductsController');
     $router->resource('session/reservations', 'Sessions\ReservationsController');
     $router->resource('session/cuisines', 'Sessions\CuisinesController');
-    $router->resource('session/cart', 'Sessions\CartController');
 });
 
 //authenticated api routes

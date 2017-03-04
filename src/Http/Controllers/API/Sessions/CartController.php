@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 use Session;
 use Log;
 use Illuminate\Support\Facades\Auth;
+use CartProvider;
+use Syscover\ShoppingCart\Item;
+use Syscover\ShoppingCart\TaxRule;
 
 class CartController extends ApiBaseController
 {
 
     public function index(Request $request)
     {
+        $cart = CartProvider::instance()->getCartItems();
         try{
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -26,15 +30,22 @@ class CartController extends ApiBaseController
     public function store(Request $request)
     {
         try {
-            Log::info(print_r(Auth::user(), true));
             $data = $request->all();
-            $cart[] = $data;
+            CartProvider::instance()->add([
+                new Item(
+                    $data['id'],
+                    $data['name'],
+                    1,
+                    $data['price']
+                ),
+            ]);
+            $cart = CartProvider::instance()->getCartItems();
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return response()->json(['data' => Auth::user()]);
+        return response()->json(['data' => $cart]);
     }
 
     public function update(Request $request, $id)

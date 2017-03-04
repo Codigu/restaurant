@@ -72,6 +72,15 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
         ], function ($router) {
             require __DIR__.'/../routes/category.php';
         });
+
+        //extended routes
+        Route::group([
+            'middleware' => 'cart',
+            'namespace' => 'CopyaRestaurant\Http\Controllers\API',
+            'prefix' => 'api',
+        ], function ($router) {
+            require __DIR__.'/../routes/cart.php';
+        });
     }
 
     public function register()
@@ -79,5 +88,7 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([RestaurantMigration::class]);
         }
+
+        $this->app->register('Gloudemans\Shoppingcart\ShoppingcartServiceProvider');
     }
 }

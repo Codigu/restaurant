@@ -68,6 +68,12 @@ function shopCtrl(
         }
 
         return total;
+    };
+
+    $scope.doCheckout = function()
+    {
+        console.log('asdfasf');
+        window.location.replace("/checkout");
     }
 
 }
