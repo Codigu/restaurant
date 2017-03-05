@@ -93,6 +93,7 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
 
 
         $this->app->register('Gloudemans\Shoppingcart\ShoppingcartServiceProvider');
+        $this->app->register('Netshell\Paypal\PaypalServiceProvider');
 
         $this->app->booting(function() {
             $loader = AliasLoader::getInstance();
