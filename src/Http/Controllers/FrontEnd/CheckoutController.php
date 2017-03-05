@@ -10,8 +10,7 @@ class CheckoutController extends BaseController
 {
     public function doCheckout()
     {
-        $cart = Cart::content();
-        dd($cart);
+
         return view('vendor.copya.front.restaurant.checkout');
     }
 }

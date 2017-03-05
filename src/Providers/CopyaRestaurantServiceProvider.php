@@ -5,6 +5,7 @@ namespace CopyaRestaurant\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use CopyaRestaurant\Console\RestaurantMigration;
+use Illuminate\Foundation\AliasLoader;
 
 class CopyaRestaurantServiceProvider extends ServiceProvider
 {
@@ -89,6 +90,13 @@ class CopyaRestaurantServiceProvider extends ServiceProvider
             $this->commands([RestaurantMigration::class]);
         }
 
+
+
         $this->app->register('Gloudemans\Shoppingcart\ShoppingcartServiceProvider');
+
+        $this->app->booting(function() {
+            $loader = AliasLoader::getInstance();
+            $loader->alias('Cart', \Gloudemans\Shoppingcart\Facades\Cart::class);
+        });
     }
 }

@@ -3,6 +3,7 @@
 namespace CopyaRestaurant\Http\Controllers\API\Sessions;
 
 use Copya\Http\Controllers\API\ApiBaseController;
+use CopyaRestaurant\Eloquent\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class CartController extends ApiBaseController
 
     public function index(Request $request)
     {
-        $cart = [];
+        $cart = Cart::content();
         try{
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -33,7 +34,7 @@ class CartController extends ApiBaseController
                 $data['name'],
                 1,
                 $data['price']
-            )->associate('Product');
+            )->associate(Product::class);
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -45,21 +46,19 @@ class CartController extends ApiBaseController
     public function update(Request $request, $id)
     {
         try {
-            $data = $request->all();
-            foreach($data as $key => $value){
-                $request->session()->put('reservation'.$key, $value);
-            }
+            $cartItem = Cart::update($id, $request->get('qty'));
+
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        return response()->json(['data' => $request->session()->get('reservation')]);
+        return response()->json(['data' => $cartItem]);
     }
 
     public function destroy(Request $request, $id)
     {
         try{
-            $request->session()->flush();
+            Cart::remove($id);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
